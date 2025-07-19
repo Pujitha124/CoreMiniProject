@@ -1,0 +1,36 @@
+﻿@model Customer
+<style>
+    .bordered-table, .bordered-table th, .bordered-table td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+    }
+
+    .Cotainer {
+        display: flex;
+        justify-content: center; /* horizontal center */
+    }
+</style>
+
+<h2 style="text-align:center;background-color:black;color:white">Customer Details</h2>
+<div class="Cotainer">
+    <table border="1" class="bordered-table">
+    <tr>
+        <th>Custid</th>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>City</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td>@Model.Custid</td>
+        <td>@Model.Name</td>
+        <td>@Model.Balance</td>
+        <td>@Model.City</td>
+        <td>@Model.Status</td>
+    </tr>
+</table>
+</div>
+<div style="display:flex; justify-content: center; margin-top:20px">
+    <a asp-action="DisplayCustomers">Back To Home</a>
+</div>

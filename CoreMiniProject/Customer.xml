@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="yes"?>
+<Customers>
+  <Customer>
+    <Custid>102</Custid>
+    <Name>Elijah</Name>
+    <Balance>24000</Balance>
+    <City> New Oreleans</City>
+    <Status>True</Status>
+  </Customer>
+  <Customer>
+    <Custid>103</Custid>
+    <Name>Rebekah</Name>
+    <Balance>24000</Balance>
+    <City> New Oreleans</City>
+    <Status>True</Status>
+  </Customer>
+  <Customer>
+    <Custid>104</Custid>
+    <Name>Hayley</Name>
+    <Balance>24000</Balance>
+    <City> New Oreleans</City>
+    <Status>True</Status>
+  </Customer>
+  <Customer>
+    <Custid>5</Custid>
+    <Name>Pujitha</Name>
+    <Balance>10000</Balance>
+    <City>Hyd</City>
+    <Status>True</Status>
+  </Customer>
+  <Customer>
+    <Custid>6</Custid>
+    <Name>Rahul</Name>
+    <Balance>290000</Balance>
+    <City>Hyd</City>
+    <Status>True</Status>
+  </Customer>
+  <Customer>
+    <Custid>99</Custid>
+    <Name>Rahul</Name>
+    <Balance>300000</Balance>
+    <City>Hyd</City>
+    <Status>True</Status>
+  </Customer>
+</Customers>
