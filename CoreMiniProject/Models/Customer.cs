@@ -10,20 +10,24 @@ public class Customer
     [DatabaseGenerated(DatabaseGeneratedOption.None)] //Controls how EF generates or expects values:
                                                       //None → You must provide the Custid value manually(EF won’t auto-generate it).
     public int Custid { get; set; }
+    [Required(ErrorMessage = "This field is mandatory")]
 
 
     [MaxLength(100)]
     [Column(TypeName = "Varchar")]
+   
     public string? Name { get; set; }
 
 
     [Column(TypeName = "Money")]
+    [Required(ErrorMessage = "This field is mandatory")]
     public decimal? Balance { get; set; }
 
 
 
     [MaxLength(100)]
     [Column(TypeName = "Varchar")]
+    [Required(ErrorMessage = "This field is mandatory")]
     public string? City { get; set; }
 
     [Required(ErrorMessage = "This field is mandatory")]

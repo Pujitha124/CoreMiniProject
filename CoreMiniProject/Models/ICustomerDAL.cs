@@ -11,6 +11,9 @@
        void Customer_Update(Customer customer);
 
        void Customer_Delete(int Custid);
+
+     
+
     }
 
 }

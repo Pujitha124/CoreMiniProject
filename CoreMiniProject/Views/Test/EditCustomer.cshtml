@@ -9,7 +9,8 @@
 <form asp-controller="Test" asp-action="UpdateCustomer" method="post">
     <div>
         <label asp-for="Custid"></label><br />
-        <input asp-for="Custid" />
+        <input asp-for="Custid" readonly />
+        @* <input asp-for="Custid" class="form-control" readonly /> *@
     </div>
 
     <div>

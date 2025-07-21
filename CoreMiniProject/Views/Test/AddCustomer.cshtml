@@ -2,9 +2,20 @@
 <form asp-controller="Test" asp-action="AddCustomer">
 	<div><label asp-for="Custid"></label><br /><input asp-for="Custid" /></div>
 	<div><label asp-for="Name"></label><br /><input asp-for="Name" /></div>
+	<span asp-validation-for="Name" class="text-danger"></span>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 	<div><label asp-for="Balance"></label><br /><input asp-for="Balance" /></div>
 	<div><label asp-for="City"></label><br /><input asp-for="City" /></div>
 	<div><label asp-for="Status"></label><br /><input asp-for="Status" /></div>
 	<div><input type="submit" value="Save" /><input type="reset" value="Reset" /></div>
 	<div><a asp-action="DisplayCustomer" align="center">Back to Customer Details</a></div>
 </form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
