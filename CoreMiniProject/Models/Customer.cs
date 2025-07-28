@@ -32,6 +32,8 @@ public class Customer
 
     [Required(ErrorMessage = "This field is mandatory")]
     public bool Status { get; set; }
+
+
 }
 
 

@@ -1,7 +1,12 @@
 using System;
+using System.Diagnostics.Metrics;
 using CoreMiniProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using static System.Net.WebRequestMethods;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace CoreMiniProject
 {
@@ -9,7 +14,13 @@ namespace CoreMiniProject
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            //var builder = WebApplication.CreateBuilder(args);
+
+            var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+            {
+                Args = args,
+                WebRootPath = "publicroot" // your renamed static folder
+            });
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -18,63 +29,31 @@ namespace CoreMiniProject
 
 
             builder.Services.AddScoped<ICustomerDAL, CustomerSqlDAL>();
-
-            //            builder.Services.AddDbContext<CoreMini>(options =>
-            //    options.UseSqlServer(
-            //        builder.Configuration.GetConnectionString("ConStr"),
-            //        sqlOptions => sqlOptions.EnableRetryOnFailure()
-            //    )
-            //);
             
             builder.Services.AddDbContext<CoreMini>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr")));
 
-
-            // To connect which dataabase
-
-            ////            builder.Services.AddDbContext<CoreMiniProjectDbContext>(options =>
-            ////    options.UseSqlServer(
-            ////        builder.Configuration.GetConnectionString("ConStr"),
-            ////        sqlOptions => sqlOptions.EnableRetryOnFailure()
-            ////    )
-            ////);
-            ///
-
-            //builder.Services.AddDbContext<CoreMini>(options =>
-            //        options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr"), options => options.EnableRetryOnFailure(
-            //        maxRetryCount: 5,
-            //        maxRetryDelay: System.TimeSpan.FromSeconds(120),
-            //        errorNumbersToAdd: null)));
-
-
-
-            //        builder.Services.AddDbContext<CoreMini>(options =>
-            //options.UseSqlServer(
-            //    builder.Configuration.GetConnectionString("ConStr"),
-            //    sqlServerOptions =>
-            //    {
-            //        sqlServerOptions.EnableRetryOnFailure(
-            //            maxRetryCount: 5,
-            //            maxRetryDelay: TimeSpan.FromSeconds(10),
-            //            errorNumbersToAdd: null);
-            //    }));
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<CoreMini>();
+            
+            //By using IdentityUser and IDentityRole We will Tell which acesss we need to give which acesss which should not give
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (!app.Environment.IsDevelopment()) // Checks if the current environment is Development.
             {
+                app.UseStatusCodePages();
+                //app.UseStatusCodePagesWithRedirects("/ClientError/{0}"); // This  will show  number in the URL 
+                app.UseStatusCodePagesWithReExecute("/ClientError/{0}"); // This will not show any  number int the URL
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-
-
-            app.UseHttpsRedirection();
+                app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

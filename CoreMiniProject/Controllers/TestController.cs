@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CoreMiniProject.Models;
+﻿using CoreMiniProject.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 namespace CoreMiniProject.Controllers
 {
+
+    [Authorize]
     public class TestController : Controller
     {
         //CustomerDAL obj = new CustomerDAL();
@@ -13,11 +16,15 @@ namespace CoreMiniProject.Controllers
         {
             this.obj = obj;
         }
+
+        [AllowAnonymous]
         public IActionResult DisplayCustomers()
         {
             return View(obj.Customers_Select());
         }
 
+
+        [Authorize]
         [HttpGet]
         public ViewResult AddCustomer()
         {
@@ -34,15 +41,19 @@ namespace CoreMiniProject.Controllers
             return View(obj.Customer_Select_Id(Custid));
         }
 
+        [Authorize]
         public IActionResult EditCustomer(int Custid)
         {
             return View(obj.Customer_Select_Id(Custid));
         }
+        [Authorize]
         public RedirectToActionResult UpdateCustomer(Customer customer)
         {
             obj.Customer_Update(customer);
             return RedirectToAction("DisplayCustomers");
         }
+
+        [Authorize]
         public RedirectToActionResult DeleteCustomer(int Custid)
         {
             obj.Customer_Delete(Custid);
